@@ -17,6 +17,7 @@ target/
 crash.log 
 override.tf 
 override.tf.json 
+
  
 # Env / secrets 
 .env 
@@ -24,3 +25,6 @@ override.tf.json
  
 # OS 
 .DS_Store 
+
+notes.txt
+.terraform.lock.hcl
