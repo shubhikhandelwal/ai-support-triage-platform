@@ -9,3 +9,11 @@ output "public_subnet_ids" {
 output "private_subnet_ids" {
   value = module.networking.private_subnet_ids
 }
+
+output "db_endpoint" {
+  value = module.rds.db_endpoint
+}
+
+output "sqs_queue_url" {
+  value = module.sqs.queue_url
+}
