@@ -12,12 +12,12 @@ resource "aws_security_group" "rdsSG" {
 } 
 
 resource "aws_vpc_security_group_ingress_rule" "rdsIngress" {
-  for_each = toset(var.allowed_security_group_ids)
+  count = length(var.allowed_security_group_ids)
   security_group_id = aws_security_group.rdsSG.id
   from_port = 5432 //TCP port 5432 is generally used by Postgres
   to_port = 5432
   ip_protocol = "tcp" 
-  referenced_security_group_id = each.value
+  referenced_security_group_id = var.allowed_security_group_ids[count.index]
 }
 
 resource "aws_vpc_security_group_egress_rule" "rdsEgress" {

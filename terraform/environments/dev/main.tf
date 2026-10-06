@@ -21,6 +21,7 @@ module "rds" {
   private_subnet_ids  = module.networking.private_subnet_ids
   db_username         = var.db_username
   db_password         = var.db_password
+  allowed_security_group_ids = [module.eks.node_security_group_id]
 }
 
 module "sqs" {
@@ -28,4 +29,12 @@ module "sqs" {
 
   environment = var.environment
   queue_name  = "ticket-created-queue"
+}
+
+module "eks" {
+  source = "../../modules/eks"
+  environment = var.environment
+  cluster_name = "${var.environment}-ai-triage-cluster"
+  vpc_id = module.networking.vpc_id
+  private_subnet_ids = module.networking.private_subnet_ids
 }
